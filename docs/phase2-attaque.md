@@ -23,7 +23,7 @@ Elle ouvre un shell caché sur le port 6200.
 - Shell obtenu avec les droits **root** (uid=0) — contrôle total de la machine.
 - Lecture de /etc/shadow (hashes de tous les comptes) → compromission
   totale possible (vol et crack des mots de passe).
-(voir screenshots/phase2-vsftpd.png)
+![Exploitation backdoor vsftpd - accès root](../screenshots/phase2-vsftpd.png)
 
 ## 4. Remédiation
 - Mettre à jour vsftpd vers une version saine (la 2.3.4 piégée doit être bannie).
@@ -44,6 +44,8 @@ Résultat : 3/7 comptes cassés en quelques secondes (mots de passe faibles).
 - klog : 123456789
 - service : service
 Les 4 autres (ex. msfadmin) ont résisté : mot de passe absent de la wordlist.
+
+![Mots de passe cassés avec John the Ripper](../screenshots/phase2-crack.png)
 
 Avec --rules : un 4e compte cassé (user:user). Les 3 derniers (dont root,
 msfadmin) résistent : mots absents de la wordlist, même après mutation.
