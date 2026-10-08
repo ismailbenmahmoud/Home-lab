@@ -33,3 +33,24 @@ Elle ouvre un shell caché sur le port 6200.
 
 ## Référence
 CVE-2011-2523 - vsftpd 2.3.4 backdoor command execution.
+
+## 5. Post-exploitation : crack des mots de passe
+Les hashes récupérés dans /etc/shadow ont été cassés avec John the Ripper :
+    john --wordlist=/usr/share/wordlists/rockyou.txt ~/shadow.txt
+    john --show ~/shadow.txt
+
+Résultat : 3/7 comptes cassés en quelques secondes (mots de passe faibles).
+- sys : batman
+- klog : 123456789
+- service : service
+Les 4 autres (ex. msfadmin) ont résisté : mot de passe absent de la wordlist.
+
+### Leçon
+Un mot de passe faible ou courant tombe quasi instantanément face à une
+wordlist comme rockyou. La robustesse d'un mot de passe = son absence des
+listes connues + sa longueur/complexité.
+
+### Remédiation
+- Politique de mots de passe forts (longueur, complexité, non-réutilisation).
+- Algorithme de hachage moderne (bcrypt/argon2) au lieu du vieux MD5crypt.
+- Déploiement d'un gestionnaire de mots de passe + MFA.
