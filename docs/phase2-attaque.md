@@ -45,6 +45,10 @@ Résultat : 3/7 comptes cassés en quelques secondes (mots de passe faibles).
 - service : service
 Les 4 autres (ex. msfadmin) ont résisté : mot de passe absent de la wordlist.
 
+Avec --rules : un 4e compte cassé (user:user). Les 3 derniers (dont root,
+msfadmin) résistent : mots absents de la wordlist, même après mutation.
+→ Confirme que la robustesse vient surtout de l'absence des listes connues.
+
 ### Leçon
 Un mot de passe faible ou courant tombe quasi instantanément face à une
 wordlist comme rockyou. La robustesse d'un mot de passe = son absence des
