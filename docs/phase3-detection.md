@@ -19,7 +19,7 @@ Dans Wazuh > Threat Hunting :
 - Pic d'activité clairement visible sur la timeline
 - Classification automatique MITRE ATT&CK : Brute Force (T1110),
   Password Guessing, SSH
-(voir screenshots/phase3-detection.png)
+![Détection du brute-force SSH dans Wazuh - MITRE ATT&CK](../screenshots/phase3-detection.png)
 
 ## Lecture
 Le SIEM transforme des centaines de lignes de logs brutes en une alerte
