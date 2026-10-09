@@ -6,9 +6,9 @@ sur un réseau coupé d'Internet et du réseau personnel.
 
 ## Architecture
 - **Hyperviseur** : VirtualBox (Windows 11, host)
-- **Réseau** : Host-Only #2 — 192.168.188.0/24, DHCP activé, aucun accès Internet
-- **Kali Linux** (attaquant) — 192.168.188.4
-- **Metasploitable 2** (cible vulnérable) — 192.168.188.3
+- **Réseau** : Host-Only #2 - 192.168.188.0/24, DHCP activé, aucun accès Internet
+- **Kali Linux** (attaquant) - 192.168.188.4
+- **Metasploitable 2** (cible vulnérable) - 192.168.188.3
 
 ## Isolement
 Les deux VM sont sur le même réseau Host-Only, sans adaptateur NAT.
