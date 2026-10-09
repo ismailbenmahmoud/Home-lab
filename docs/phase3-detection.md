@@ -30,3 +30,36 @@ lisible et catégorisée. C'est ce qui permet à un analyste de réagir vite.
 - Désactiver l'authentification par mot de passe (clés SSH uniquement)
 - Changer le port SSH par défaut, restreindre par pare-feu
 - Mettre en place des alertes temps réel sur seuil d'échecs
+
+
+## Réponse automatique : fail2ban
+
+### Objectif
+Passer de la détection à la réaction : bannir automatiquement une IP qui
+tente un brute-force SSH.
+
+### Mise en place (sur le serveur 192.168.188.5)
+    sudo apt install fail2ban
+Config dans /etc/fail2ban/jail.local :
+    [sshd]
+    enabled = true
+    backend = systemd
+    maxretry = 3
+    findtime = 600
+    bantime = 600
+
+### Test
+Brute-force relancé depuis Kali (192.168.188.4) avec hydra.
+Après 3 échecs, fail2ban a banni l'IP automatiquement :
+    Currently banned: 1
+    Banned IP list: 192.168.188.4
+(voir screenshots/phase3-fail2ban.png)
+
+### Lecture
+Wazuh détecte et classe l'attaque, fail2ban la bloque en temps réel.
+Les deux sont complémentaires : visibilité + réaction automatique.
+
+### Remédiation complète recommandée
+- Authentification SSH par clés (désactiver les mots de passe)
+- Changer le port SSH par défaut
+- fail2ban en complément pour les tentatives résiduelles
