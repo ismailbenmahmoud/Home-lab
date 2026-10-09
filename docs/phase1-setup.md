@@ -16,6 +16,7 @@ Metasploitable n'est jamais exposée au réseau physique.
 
 ## Validation
 Ping de Kali vers la cible : 3/3 paquets reçus, 0% de perte.
+
 ![Ping validé entre Kali et la cible](../screenshots/ping-phase1.png)
 
 ## Schéma

