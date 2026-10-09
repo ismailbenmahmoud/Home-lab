@@ -1,4 +1,4 @@
-# Home Lab — Cybersécurité offensive & défensive
+# Home Lab - Cybersécurité offensive & défensive
 
 [English](./README.md) · **Français**
 
