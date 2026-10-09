@@ -53,7 +53,8 @@ Brute-force relancé depuis Kali (192.168.188.4) avec hydra.
 Après 3 échecs, fail2ban a banni l'IP automatiquement :
     Currently banned: 1
     Banned IP list: 192.168.188.4
-(voir screenshots/phase3-fail2ban.png)
+
+![Bannissement automatique de Kali par fail2ban](../screenshots/phase3-fail2ban.png)
 
 ### Lecture
 Wazuh détecte et classe l'attaque, fail2ban la bloque en temps réel.
