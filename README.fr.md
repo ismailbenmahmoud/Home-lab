@@ -2,36 +2,35 @@
 
 [English](./README.md) · **Français**
 
-Laboratoire de sécurité monté de zéro pour pratiquer l'attaque, la défense
-et la détection dans un environnement isolé. Projet mené en autonomie,
-documenté phase par phase.
+Un lab de sécurité monté de zéro pour pratiquer l'attaque, la défense et la
+détection dans un environnement isolé. Projet solo, documenté phase par phase.
 
-> **Cadre légal** : toutes les attaques sont menées exclusivement contre
-> mes propres machines, dans un réseau isolé et coupé d'Internet. Aucune
-> action n'est dirigée contre un système tiers.
+> **Mention légale** : toutes les attaques sont menées exclusivement contre
+> mes propres machines, dans un réseau isolé sans accès Internet. Aucune action
+> n'est jamais dirigée vers des systèmes tiers.
 
 ---
 
 ## Objectif
 
-Couvrir la chaîne complète d'une opération de sécurité :
-**reconnaissance → exploitation → post-exploitation → détection**, en
-jouant successivement l'attaquant (Red Team) et le défenseur (Blue Team).
+Couvrir toute la chaîne d'une opération de sécurité :
+**reconnaissance → exploitation → post-exploitation → détection**,
+en jouant à la fois l'attaquant (Red Team) et le défenseur (Blue Team).
 
 ---
 
-## Architecture
+##  Architecture
 
 ```
-                 Réseau isolé — 192.168.188.0/24 (Host-Only, sans Internet)
+             Réseau isolé — 192.168.188.0/24 (Host-Only, sans Internet)
 
-   ┌─────────────────┐       attaques        ┌──────────────────────┐
-   │   KALI LINUX    │ ────────────────────▶ │   METASPLOITABLE 2   │
+   ┌─────────────────┐       attaques       ┌──────────────────────┐
+   │   KALI LINUX    │ ────────────────────▶│   METASPLOITABLE 2   │
    │  (attaquant)    │                       │   (cible vulnérable) │
    │  192.168.188.4  │                       │   192.168.188.3      │
    └────────┬────────┘                       └──────────────────────┘
             │
-            │ journaux d'activité
+            │ logs d'activité
             ▼
    ┌─────────────────────────────┐
    │     WAZUH SIEM (Ubuntu)     │  ◀── collecte, détecte et classe
@@ -39,49 +38,52 @@ jouant successivement l'attaquant (Red Team) et le défenseur (Blue Team).
    └─────────────────────────────┘
 ```
 
-
 ---
 
 ## Phases du projet
 
-| Phase | Thème | Outils | Résultat |
-|-------|-------|--------|----------|
-| 1 | Mise en place du lab isolé | VirtualBox | 2 VM isolées, communication validée |
-| 2 | Attaque (Red Team) | nmap, Metasploit, John the Ripper | Accès root + crack de mots de passe |
+| Phase | Objectif | Outils | Résultat |
+|-------|----------|--------|----------|
+| 1 | Mise en place du lab isolé | VirtualBox | 2 VM isolées, connectivité vérifiée |
+| 2 | Attaque (Red Team) | nmap, Metasploit, John the Ripper | Accès root + cassage de mots de passe |
 | 3 | Détection (Blue Team) | Wazuh (SIEM) | Attaque détectée + classée MITRE ATT&CK |
-| 4 | Honeypot *(à venir)* | Cowrie, VPS | Analyse d'attaques réelles d'Internet |
+| 4 | Honeypot | Cowrie, VPS (Hetzner) | 20 038 attaques réelles capturées & analysées en 3,5 jours |
 
 Chaque phase est détaillée dans [`/docs`](./docs).
 
 ---
 
-## Points forts techniques
+## Points techniques forts
 
 - **Exploitation** : backdoor vsftpd 2.3.4 (CVE-2011-2523) → shell root
-- **Post-exploitation** : extraction et crack du `/etc/shadow` (rockyou + règles)
-- **Détection** : SIEM Wazuh détectant un brute-force SSH en temps réel,
-  avec classification automatique selon le framework MITRE ATT&CK
-- **Démarche défensive** : chaque faille exploitée est accompagnée de sa
+- **Post-exploitation** : extraction de `/etc/shadow` et cassage (rockyou + règles)
+- **Détection** : Wazuh SIEM détectant un brute-force SSH en temps réel,
+  avec classification automatique via le framework MITRE ATT&CK
+- **Threat intelligence** : un honeypot Cowrie exposé sur Internet a capturé
+  20 038 attaques venant de 573 IP uniques en 3,5 jours ; identification d'un
+  botnet coordonné hébergé sur une infrastructure complaisante (AS198364) et
+  de la technique de persistance par clé SSH (MITRE T1098.004)
+- **Esprit défensif** : chaque faille exploitée est accompagnée de sa
   remédiation dans la documentation
 
 ---
 
-## Compétences mises en œuvre
+## Compétences démontrées
 
-Virtualisation · Réseau & segmentation · Pentest · Linux ·
-Analyse de logs / SIEM · MITRE ATT&CK · Documentation technique
+Virtualisation · Réseau & segmentation · Test d'intrusion ·
+Linux · Analyse de logs / SIEM · MITRE ATT&CK · Threat intelligence ·
+Rédaction technique
 
 ---
 
 ## Structure du dépôt
-
 Home-lab/
 ├── docs/ # Documentation détaillée par phase
 ├── configs/ # Fichiers de configuration
-└── screenshots/ # Captures (scans, exploitations, alertes)
+└── screenshots/ # Captures (scans, exploitation, alertes)
 
 ---
 
 ## Auteur
 
-**Ismail Ben Mahmoud** - Étudiant ingénieur, majeure Cybersécurité (ECE Paris)
+**Ismail Ben Mahmoud** - Étudiant ingénieur, majeure cybersécurité (ECE Paris)

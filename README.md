@@ -47,7 +47,7 @@ playing both the attacker (Red Team) and the defender (Blue Team).
 | 1 | Isolated lab setup | VirtualBox | 2 isolated VMs, connectivity verified |
 | 2 | Attack (Red Team) | nmap, Metasploit, John the Ripper | Root access + password cracking |
 | 3 | Detection (Blue Team) | Wazuh (SIEM) | Attack detected + mapped to MITRE ATT&CK |
-| 4 | Honeypot *(upcoming)* | Cowrie, VPS | Analysis of real-world Internet attacks |
+| 4 | Honeypot | Cowrie, VPS (Hetzner) | 20,038 real attacks captured & analyzed in 3.5 days |
 
 Each phase is detailed in [`/docs`](./docs).
 
@@ -59,6 +59,10 @@ Each phase is detailed in [`/docs`](./docs).
 - **Post-exploitation**: `/etc/shadow` extraction and cracking (rockyou + rules)
 - **Detection**: Wazuh SIEM detecting an SSH brute-force in real time,
   with automatic classification using the MITRE ATT&CK framework
+- **Threat intelligence**: a Cowrie honeypot exposed on the Internet captured
+  20,038 attacks from 573 unique IPs in 3.5 days; identified a coordinated
+  botnet hosted on bulletproof infrastructure (AS198364) and the SSH-key
+  persistence technique (MITRE T1098.004)
 - **Defensive mindset**: every exploited flaw comes with its remediation
   in the documentation
 
@@ -67,7 +71,8 @@ Each phase is detailed in [`/docs`](./docs).
 ## Skills demonstrated
 
 Virtualization · Networking & segmentation · Penetration testing ·
-Linux · Log analysis / SIEM · MITRE ATT&CK · Technical writing
+Linux · Log analysis / SIEM · MITRE ATT&CK · Threat intelligence ·
+Technical writing
 
 ---
 
